@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AuroraBackground from "./components/AuroraBackground";
 import CustomCursor from "./components/CustomCursor";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({
         <AuroraBackground />
         <CustomCursor />
         {children}
+        <Analytics />
       </body>
     </html>
   );
