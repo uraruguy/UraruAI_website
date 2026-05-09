@@ -69,32 +69,69 @@ export default function Services() {
           {services.map((svc, i) => (
             <motion.div
               key={svc.number}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.6, delay: i * 0.12 }}
               className="flex flex-col"
             >
-              <div className="text-5xl font-bold text-white/5 font-mono mb-4 select-none">
+              {/* Number fades in first */}
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: { duration: 0.5, delay: i * 0.12 },
+                  },
+                }}
+                className="text-5xl font-bold text-white/10 font-mono mb-4 select-none"
+              >
                 {svc.number}
-              </div>
-              <h3 className="text-xl font-semibold text-[#F0EDE4] mb-1">
+              </motion.div>
+
+              {/* Title slides up after number */}
+              <motion.h3
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.4, delay: i * 0.12 + 0.28 },
+                  },
+                }}
+                className="text-xl font-semibold text-[#F0EDE4] mb-1"
+              >
                 {svc.title}
-              </h3>
-              <p className="text-sm text-[#00C4CF] mb-4 font-mono tracking-wide">
-                {svc.subtitle}
-              </p>
-              <p className="text-[#888888] text-sm leading-relaxed mb-6">
-                {svc.description}
-              </p>
-              <ul className="space-y-2 mt-auto">
-                {svc.bullets.map((b) => (
-                  <li key={b} className="flex items-center gap-2.5 text-sm text-[#888888]">
-                    <span className="w-1 h-1 rounded-full bg-[#00C4CF] shrink-0" />
-                    {b}
-                  </li>
-                ))}
-              </ul>
+              </motion.h3>
+
+              {/* Rest fades in after title */}
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: { duration: 0.4, delay: i * 0.12 + 0.45 },
+                  },
+                }}
+                className="flex flex-col flex-1"
+              >
+                <p className="text-sm text-[#00C4CF] mb-4 font-mono tracking-wide">
+                  {svc.subtitle}
+                </p>
+                <p className="text-[#888888] text-sm leading-relaxed mb-6">
+                  {svc.description}
+                </p>
+                <ul className="space-y-2 mt-auto">
+                  {svc.bullets.map((b) => (
+                    <li
+                      key={b}
+                      className="flex items-center gap-2.5 text-sm text-[#888888]"
+                    >
+                      <span className="w-1 h-1 rounded-full bg-[#00C4CF] shrink-0" />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
             </motion.div>
           ))}
         </div>
