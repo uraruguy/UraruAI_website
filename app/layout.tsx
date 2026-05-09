@@ -4,6 +4,7 @@ import "./globals.css";
 import AuroraBackground from "./components/AuroraBackground";
 import CustomCursor from "./components/CustomCursor";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
         <CustomCursor />
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
